@@ -1,5 +1,4 @@
-# Robotics Frameworks (RoF) — FAU Erlangen-Nürnberg
-
+# Robotics Frameworks
 > **ROS2 Humble · Gazebo Classic · Nav2 · FlexBE · OpenCV · TensorFlow/Keras · YOLOv8**
 > WS 2025/26 | Dr.-Ing. Sebastian Reitelshofer
 
