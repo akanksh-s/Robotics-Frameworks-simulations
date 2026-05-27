@@ -1,0 +1,19 @@
+# EU_02 Custom Service Definition: Add.srv
+# Location: my_cliserv_package_interfaces/srv/Add.srv
+#
+# Theory:
+#   ROS2 service interfaces are defined in .srv files separated by ---:
+#     Lines BEFORE --- define the REQUEST fields
+#     Lines AFTER  --- define the RESPONSE fields
+#
+#   After building, the service is accessible in C++ as:
+#     #include "my_cliserv_package_interfaces/srv/add.hpp"
+#   The request and response are accessed via:
+#     SrvType::Request   and   SrvType::Response
+
+# ── Request ──────────────────────────────────────────────────────
+int64 a
+int64 b
+---
+# ── Response ─────────────────────────────────────────────────────
+int64 sum

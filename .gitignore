@@ -1,0 +1,49 @@
+# ── Exam Prep (private — do not push) ────────────────────────────────────────
+exam_prep/
+
+# ── Build & Install ───────────────────────────────────────────────────────────
+build/
+install/
+log/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+
+# ── ROS2 / colcon ─────────────────────────────────────────────────────────────
+COLCON_IGNORE
+AMENT_IGNORE
+.colcon_install_layout
+
+# ── AI model weights (large binary — download at runtime) ────────────────────
+*.pt
+*.onnx
+*.tflite
+*.h5
+*.keras
+
+# ── Jupyter / Python ─────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.py[cod]
+
+# ── IDE / OS ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# ── Gazebo / ROS artefacts ────────────────────────────────────────────────────
+*.bag
+*.db3
+*.mcap
+*.ros
+/maps/
+*.pgm
+*.yaml.bak
+
+# ── Compiled binaries ─────────────────────────────────────────────────────────
+*.so
+*.o
+*.a

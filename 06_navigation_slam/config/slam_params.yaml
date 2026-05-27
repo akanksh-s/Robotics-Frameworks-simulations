@@ -1,0 +1,79 @@
+# EU_06 SLAM Parameters Configuration
+# File: rof_navigation/config/slam_params.yaml
+#
+# Theory:
+#   slam_toolbox uses a "Ceres" nonlinear least-squares solver to minimise
+#   the scan matching error and update the map and pose estimate.
+#
+#   Two modes:
+#     mapping     → Creates a new map from scratch (use when exploring)
+#     localization → Loads a saved map and only localizes (use after mapping)
+#
+#   Important parameters:
+#     odom_frame  : frame that tracks relative robot motion (from wheel odometry)
+#     map_frame   : fixed global frame (the map itself)
+#     base_frame  : robot body frame
+#     scan_topic  : LIDAR data input
+#
+#   To SAVE the map:
+#     rqt → Plugins → Services → Service Caller
+#     Call: /slam_toolbox/serialize_map  with filename: '/home/robot/map'
+#
+#   To switch to LOCALIZATION mode:
+#     Change mode to 'localization'
+#     Set map_file_name to your saved map path
+#     Set map_start_pose to [x, y, theta] of robot start position
+
+slam_toolbox:
+  ros__parameters:
+    # ── Solver parameters (Ceres nonlinear solver) ────────────────────────────
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+
+    # ── ROS Frame Configuration ────────────────────────────────────────────────
+    odom_frame: odom                  # Wheel odometry frame
+    map_frame: map                    # Global map frame (fixed)
+    base_frame: base_footprint        # Robot body frame (TurtleBot3 uses base_footprint)
+    scan_topic: /scan                 # LIDAR input topic
+
+    # ── Simulation Time ────────────────────────────────────────────────────────
+    use_sim_time: true                # Must match Gazebo!
+
+    # ── Operation Mode ─────────────────────────────────────────────────────────
+    # mapping     → explore and build a new map
+    # localization → localise in a pre-saved map
+    mode: mapping                     # CHANGE TO 'localization' after map is saved
+
+    # ── Localization-only parameters (active only in localization mode) ────────
+    # map_file_name: /home/robot/map
+    # map_start_pose: [0.0, 0.0, 0.0]
+
+    # ── Map saving ─────────────────────────────────────────────────────────────
+    use_map_saver: true
+
+    # ── Scan Matching ──────────────────────────────────────────────────────────
+    debug_logging: false
+    throttle_scans: 1                 # Process every scan
+    transform_publish_period: 0.02   # TF publish rate (50 Hz)
+    map_update_interval: 5.0         # Seconds between map updates
+    resolution: 0.05                 # Map resolution: 5 cm per cell
+    max_laser_range: 20.0            # Max range for scan matching (meters)
+    minimum_time_interval: 0.5       # Min time between loop closures
+    transform_timeout: 0.2           # TF lookup timeout
+    tf_buffer_duration: 30.0
+
+    # ── Loop Closure ───────────────────────────────────────────────────────────
+    coarse_search_angle_offset: 0.349
+    coarse_angle_resolution: 0.0349
+    minimum_angle_penalty: 0.9
+    minimum_distance_penalty: 0.5
+    use_scan_matching: true
+    use_scan_barycenter: true
+    lifetime_score_ratio: 0.65
+    scan_buffer_size: 10
+    link_match_minimum_response_fine: 0.1
+    link_scan_maximum_distance: 1.5
